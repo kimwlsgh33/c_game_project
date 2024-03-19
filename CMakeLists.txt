@@ -1,12 +1,15 @@
 cmake_minimum_required(VERSION 3.0)
 project(tetris_kjh)
 
-file(GLOB SRC_FILES "src/*.c")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_executable(tetris_kjh ${SRC_FILES})
-target_include_directories(tetris_kjh PUBLIC include)
+file(GLOB SRC_FILES "${CMAKE_SOURCE_DIR}/src/*.c")
 
-install(TARGETS tetris_kjh DESTINATION /usr/local/bin)
+add_executable(${PROJECT_NAME} ${SRC_FILES})
+# sepcify the directories in which the compiler should search for header files when building a specific target(PROJECT_NAME)
+target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_SOURCE_DIR}/include")
+
+install(TARGETS ${PROJECT_NAME} DESTINATION /usr/local/bin)
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION /usr/local/include)
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/ DESTINATION /usr/local/src)
 
